@@ -15,6 +15,10 @@ export interface AddressProps {
   state: string;
 }
 
+export interface AddressContentProps {
+  address: AddressProps;
+}
+
 export interface ImageMiniatureProps {
   image: string;
   index: number;

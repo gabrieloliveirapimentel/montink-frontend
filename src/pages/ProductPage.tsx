@@ -9,6 +9,7 @@ import { ImageMiniature } from "../components/ImageMiniature";
 import { ImageOptions } from "../components/ImageOptions";
 import { SizeOptions } from "../components/SizeOptions";
 import { ImageOption } from "../components/ImageOption";
+import { AddressContent } from "../components/AddressContent";
 
 export function ProductPage() {
   const sizes = ["P", "M", "G", "GG"];
@@ -82,7 +83,7 @@ export function ProductPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="flex flex-col gap-4">
           <ImageOption currentImage={currentImage} />
           <div className="flex gap-2 overflow-x-auto pb-2">
@@ -166,43 +167,8 @@ export function ProductPage() {
             </div>
           </div>
           <div>
-            {showAddress && address && (
-              <div className="flex flex-col gap-2">
-                <span className="text-gray-900 font-semibold">Endereço:</span>
-                <input
-                  type="text"
-                  placeholder="Rua"
-                  value={address.street}
-                  readOnly
-                  className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600 "
-                />
-                <div className="flex flex-row gap-2">
-                  <input
-                    type="text"
-                    placeholder="Bairro"
-                    value={address.neighborhood}
-                    readOnly
-                    className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600 w-[80%]"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Cidade"
-                    value={address.city}
-                    readOnly
-                    className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600 "
-                  />
-                  <input
-                    type="text"
-                    placeholder="Estado"
-                    value={address.state}
-                    readOnly
-                    className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600 w-[50%]"
-                  />
-                </div>
-              </div>
-            )}
+            {showAddress && address && <AddressContent address={address} />}
           </div>
-
           <button
             className="bg-orange-600 hover:bg-orange-700 px-4 py-4 rounded-md border border-primary font-medium text-white"
             onClick={handleSubmit}
