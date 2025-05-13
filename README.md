@@ -1,54 +1,49 @@
-# React + TypeScript + Vite
+<h3 align="center">
+  Montink Frontend
+</h3>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esse projeto foi desenvolvido para o teste rápido como parte do processo seletivo do Montink para Desenvolvedor Front-end. O desafio consiste em criar um front-end utilizando <b>React</b> e <b>Tailwind CSS</b>, de uma página de produto de E-commerce, contendo:
+- **Imagens do produto:** Uma imagem principal que ocupe cerca de 35% da tela, e abaixo dela, miniaturas de outras imagens do mesmo produto.
+- Título e preço do produto.
+- **Seletores de variantes de produto:** Tamanho e Cor. Esses campos precisam ser gerados de maneira dinâmica.
+- **Campo de disponibilidade de Entrega:** Crie um campo que formata e verifica do frete digitado, caso o CEP exista, exiba o endereço completo.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Bibliotecas 
+As seguintes ferramentas e bibliotecas foram utilizadas neste projeto
 
-## Expanding the ESLint configuration
+- <b>Tailwind CSS</b>: para estilização da interface do usuário;
+- <b>TypeScript</b>: para assegurar a tipagem correta e limpa;
+- <b>Axios</b>: para lidar com a chamada API do ViaCep.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Deploy
+Você pode visualizar esse projeto com deploy clicando no [link](https://montink-frontend.vercel.app/).
+---
+
+### Getting started
+Para rodar essa aplicação local, siga os passos abaixo:
+
+**Clone o repositório:**
+
+```bash
+git clone https://github.com/gabrieloliveirapimentel/montink-frontend.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+**Navege até o diretório do projeto e instale as dependências:**
+```bash
+cd montink-frontend
+npm install
 ```
+
+**Inicie o servidor de desenvolvimento:**
+```bash
+npm run dev
+```
+
+Isso irá instalar todos pacotes necessários e iniciar o ambiente de desenvolvimento em [**http://localhost:3003**](http://localhost:3003).
+
+---
+Se tiver sugestões ou melhorias, sinta-se à vontade para enviar pull requests!
