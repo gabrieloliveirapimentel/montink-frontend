@@ -1,27 +1,65 @@
 import { Truck } from "lucide-react";
 import { shirts } from "../../data.json";
 import { useState } from "react";
-
-export interface ProductProps {
-  id: number;
-  name: string;
-  description: string;
-  color: string;
-  sizes: string[];
-  price: number;
-  images: string[];
-}
+import { formatCep, formatCurrency } from "../utils/format";
+import { getCep } from "../utils/api";
+import type { AddressProps, ProductProps } from "../types/types";
 
 export function ProductPage() {
   const sizes = ["P", "M", "G", "GG"];
   const products: ProductProps[] = shirts;
   const [currentProduct, setCurrentProduct] = useState<ProductProps>(shirts[0]);
 
+  const [currentSize, setCurrentSize] = useState<string>("");
   const [currentImage, setCurrentImage] = useState<string>(
     currentProduct.images[0]
   );
-  const [currentColor, setCurrentColor] = useState<string>("");
-  const [currentSize, setCurrentSize] = useState<string>("");
+
+  const [currentCep, setCurrentCep] = useState<string>("");
+  const [address, setAddress] = useState<AddressProps>();
+  const [showAddress, setShowAddress] = useState<boolean>(false);
+
+  function handleResetCep() {
+    setAddress({
+      street: "",
+      neighborhood: "",
+      city: "",
+      state: "",
+    });
+    setShowAddress(false);
+  }
+
+  async function handleCepChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const formattedCep = formatCep(e.target.value);
+    setCurrentCep(formattedCep);
+
+    if (formattedCep.length === 9) {
+      const data = await getCep(e.target.value);
+
+      if (data.data.erro) {
+        alert("CEP inválido");
+        handleResetCep();
+
+        return;
+      }
+
+      try {
+        const { logradouro, bairro, localidade, uf } = data.data;
+        setAddress({
+          street: logradouro,
+          neighborhood: bairro,
+          city: localidade,
+          state: uf,
+        });
+        setShowAddress(true);
+      } catch (error) {
+        console.error("Error fetching address data:", error);
+        handleResetCep();
+      }
+    } else {
+      handleResetCep();
+    }
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -52,10 +90,7 @@ export function ProductPage() {
               {currentProduct.name} - {currentProduct.color}
             </h1>
             <span className="text-xl md:text-2xl font-semibold mt-2 text-orange-600">
-              {new Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              }).format(Number(currentProduct.price))}
+              {formatCurrency(currentProduct.price)}
             </span>
           </div>
           <span className="text-gray-500">{currentProduct.description}</span>
@@ -118,6 +153,8 @@ export function ProductPage() {
               <input
                 type="text"
                 placeholder="CEP"
+                value={currentCep}
+                onChange={handleCepChange}
                 maxLength={9}
                 className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600"
               />
@@ -126,6 +163,43 @@ export function ProductPage() {
                 <span>Não sei meu CEP</span>
               </button>
             </div>
+          </div>
+          <div>
+            {showAddress && address && (
+              <div className="flex flex-col gap-2">
+                <span className="text-gray-900 font-semibold">Endereço:</span>
+                <input
+                  type="text"
+                  placeholder="Rua"
+                  value={address.street}
+                  readOnly
+                  className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600 "
+                />
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="text"
+                    placeholder="Bairro"
+                    value={address.neighborhood}
+                    readOnly
+                    className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600 w-[80%]"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Cidade"
+                    value={address.city}
+                    readOnly
+                    className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600 "
+                  />
+                  <input
+                    type="text"
+                    placeholder="Estado"
+                    value={address.state}
+                    readOnly
+                    className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600 w-[50%]"
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           <button className="bg-orange-600 hover:bg-orange-700 px-4 py-4 rounded-md border border-primary font-medium text-white">
