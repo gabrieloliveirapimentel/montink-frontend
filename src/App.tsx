@@ -1,8 +1,11 @@
+import { Header } from "./components/Header";
+import { ProductPage } from "./pages/ProductPage";
+
 export function App() {
   return (
-    <div>
-      <h1>Hello, world!</h1>
-      <p>This is a simple React app.</p>
-    </div>
+    <>
+      <Header />
+      <ProductPage />
+    </>
   );
 }
