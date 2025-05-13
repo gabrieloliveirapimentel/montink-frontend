@@ -16,6 +16,8 @@ export function useProduct() {
         const now = new Date().getTime();
 
         if (now - timestamp < 900000) {
+          setCurrentImage(parsedData.currentImage);
+          setCurrentSize(parsedData.currentSize);
           setCurrentProduct(parsedData.currentProduct);
         } else {
           localStorage.removeItem("current-product");
