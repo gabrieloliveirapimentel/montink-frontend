@@ -6,6 +6,18 @@ export function SizeOptions({
   setCurrentSize,
   currentProduct,
 }: SizeOptionsProps) {
+  function handleSelectSize(size: string) {
+    setCurrentSize(size);
+
+    const storedProduct = localStorage.getItem("current-product");
+    const updatedProduct = {
+      ...(storedProduct ? JSON.parse(storedProduct) : {}),
+      currentSize: size,
+    };
+
+    localStorage.setItem("current-product", JSON.stringify(updatedProduct));
+  }
+
   return (
     <button
       key={size}
@@ -16,7 +28,7 @@ export function SizeOptions({
       } ${!currentProduct.sizes.includes(size) && "opacity-50"}
                   }`}
       onClick={() => {
-        setCurrentSize(size);
+        handleSelectSize(size);
       }}
       disabled={!currentProduct.sizes.includes(size)}
     >

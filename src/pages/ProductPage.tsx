@@ -119,7 +119,15 @@ export function ProductPage() {
                 className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600"
               />
 
-              <button className="px-4 py-4 rounded-md border-2 border-orange-600 text-orange-600 font-semibold hover:bg-orange-600/10">
+              <button
+                className="px-4 py-4 rounded-md border-2 border-orange-600 text-orange-600 font-semibold hover:bg-orange-600/10"
+                onClick={() =>
+                  window.open(
+                    "https://buscacepinter.correios.com.br/app/endereco/index.php",
+                    "_blank"
+                  )
+                }
+              >
                 <span>Não sei meu CEP</span>
               </button>
             </div>
