@@ -4,6 +4,11 @@ import { useState } from "react";
 import { formatCep, formatCurrency } from "../utils/format";
 import { getCep } from "../utils/api";
 import type { AddressProps, ProductProps } from "../types/types";
+import toast from "react-hot-toast";
+import { ImageMiniature } from "../components/ImageMiniature";
+import { ImageOptions } from "../components/ImageOptions";
+import { SizeOptions } from "../components/SizeOptions";
+import { ImageOption } from "../components/ImageOption";
 
 export function ProductPage() {
   const sizes = ["P", "M", "G", "GG"];
@@ -37,7 +42,7 @@ export function ProductPage() {
       const data = await getCep(e.target.value);
 
       if (data.data.erro) {
-        alert("CEP inválido");
+        toast.error("CEP inválido, tente novamente!");
         handleResetCep();
 
         return;
@@ -61,26 +66,35 @@ export function ProductPage() {
     }
   }
 
+  function handleSubmit() {
+    if (currentSize === "") {
+      toast.error("Selecione um tamanho!");
+      return;
+    }
+
+    if (currentCep.length < 9) {
+      toast.error("Digite um CEP válido!");
+      return;
+    }
+
+    toast.success("Produto adicionado ao carrinho!");
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex flex-col gap-4">
-          <div className="relative w-full aspect-square rounded-2xl overflow-hidden border border-gray-200">
-            <img src={currentImage} alt="Produto" className="object-cover" />
-          </div>
+          <ImageOption currentImage={currentImage} />
           <div className="flex gap-2 overflow-x-auto pb-2">
             {currentProduct.images.map((image, index) => (
-              <button
+              <ImageMiniature
                 key={index}
-                className={`relative w-20 h-20 rounded-md overflow-hidden flex-shrink-0 border-2 ${
-                  currentImage === image
-                    ? "border-orange-600"
-                    : "border-gray-100"
-                }`}
-                onClick={() => setCurrentImage(currentProduct.images[index])}
-              >
-                <img src={image} className="object-cover" />
-              </button>
+                image={image}
+                index={index}
+                currentImage={currentImage}
+                setCurrentImage={setCurrentImage}
+                currentProduct={currentProduct}
+              />
             ))}
           </div>
         </div>
@@ -99,22 +113,17 @@ export function ProductPage() {
               Cor: {currentProduct.color}
             </h3>
             <div className="flex flex-wrap gap-3">
-              {products.map((product) => (
-                <button
-                  key={product.id}
-                  className={`relative w-10 h-10 rounded-md overflow-hidden flex-shrink-0 border-2 ${
-                    currentProduct.color === product.color
-                      ? "border-orange-600"
-                      : "border-gray-100"
-                  }`}
-                  onClick={() => {
+              {products.map((product, index) => (
+                <ImageOptions
+                  key={index}
+                  product={product}
+                  currentProduct={currentProduct}
+                  handleFn={() => {
                     setCurrentSize("");
                     setCurrentProduct(product);
                     setCurrentImage(product.images[0]);
                   }}
-                >
-                  <img src={product.images[0]} className="object-cover" />
-                </button>
+                />
               ))}
             </div>
           </div>
@@ -123,21 +132,13 @@ export function ProductPage() {
             <h3 className="font-medium text-gray-900">Tamanho: P</h3>
             <div className="flex flex-wrap gap-3">
               {sizes.map((size) => (
-                <button
+                <SizeOptions
                   key={size}
-                  className={`px-4 py-2 rounded-md border-2 ${
-                    currentSize === size
-                      ? "border-orange-600 text-orange-600"
-                      : "border-gray-300 text-gray-500"
-                  } ${!currentProduct.sizes.includes(size) && "opacity-50"}
-                  }`}
-                  onClick={() => {
-                    setCurrentSize(size);
-                  }}
-                  disabled={!currentProduct.sizes.includes(size)}
-                >
-                  {size}
-                </button>
+                  size={size}
+                  currentSize={currentSize}
+                  setCurrentSize={setCurrentSize}
+                  currentProduct={currentProduct}
+                />
               ))}
             </div>
           </div>
@@ -202,7 +203,10 @@ export function ProductPage() {
             )}
           </div>
 
-          <button className="bg-orange-600 hover:bg-orange-700 px-4 py-4 rounded-md border border-primary font-medium text-white">
+          <button
+            className="bg-orange-600 hover:bg-orange-700 px-4 py-4 rounded-md border border-primary font-medium text-white"
+            onClick={handleSubmit}
+          >
             <span>Adicionar ao carrinho</span>
           </button>
         </div>
