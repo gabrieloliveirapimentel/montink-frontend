@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import type { SizeOptionsProps } from "../types/types";
 
 export function SizeOptions({
@@ -6,6 +7,14 @@ export function SizeOptions({
   setCurrentSize,
   currentProduct,
 }: SizeOptionsProps) {
+  useEffect(() => {
+    const storedProduct = localStorage.getItem("current-product");
+    if (storedProduct) {
+      const parsedProduct = JSON.parse(storedProduct);
+      setCurrentSize(parsedProduct.currentSize || "");
+    }
+  }, [setCurrentSize]);
+
   function handleSelectSize(size: string) {
     setCurrentSize(size);
 

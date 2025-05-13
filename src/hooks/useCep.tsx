@@ -18,7 +18,14 @@ export function useCep() {
         const now = new Date().getTime();
 
         if (now - timestamp < 900000) {
-          setCurrentCep(parsedData);
+          setCurrentCep(parsedData.cep);
+          setAddress({
+            street: parsedData.street,
+            neighborhood: parsedData.neighborhood,
+            city: parsedData.city,
+            state: parsedData.state,
+          });
+          setShowAddress(parsedData.showAddress);
         } else {
           localStorage.removeItem("current-cep");
         }
@@ -60,9 +67,17 @@ export function useCep() {
           neighborhood: bairro,
           city: localidade,
           state: uf,
+          showAddress: true,
+          cep: formattedCep,
+          timestamp: new Date().getTime(),
         };
 
-        setAddress(formattedAddress);
+        setAddress({
+          street: logradouro,
+          neighborhood: bairro,
+          city: localidade,
+          state: uf,
+        });
         setShowAddress(true);
         localStorage.setItem("current-cep", JSON.stringify(formattedAddress));
       } catch (error) {

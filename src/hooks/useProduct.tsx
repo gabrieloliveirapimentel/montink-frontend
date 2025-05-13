@@ -12,11 +12,11 @@ export function useProduct() {
     if (savedData) {
       try {
         const parsedData = JSON.parse(savedData);
-        const timestamp = parsedData.timestamp || 0;
+        const timestamp = parsedData.currentTime || 0;
         const now = new Date().getTime();
 
         if (now - timestamp < 900000) {
-          setCurrentProduct(parsedData);
+          setCurrentProduct(parsedData.currentProduct);
         } else {
           localStorage.removeItem("current-product");
         }
@@ -35,6 +35,7 @@ export function useProduct() {
       currentProduct: product,
       currentImage: product.images[0],
       currentSize: "",
+      currentTime: new Date().getTime(),
     };
 
     localStorage.setItem("current-product", JSON.stringify(formattedProduct));
