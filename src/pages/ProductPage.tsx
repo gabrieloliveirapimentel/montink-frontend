@@ -1,81 +1,109 @@
 import { Truck } from "lucide-react";
+import { shirts } from "../../data.json";
+import { useState } from "react";
 
-import productImg from "../assets/PI3-5765-014_zoom1.webp";
-import productImg2 from "../assets/PI3-5765-014_zoom2.webp";
-import productImg3 from "../assets/PI3-5765-014_zoom3.webp";
-import productImg4 from "../assets/PI3-5765-014_zoom4.webp";
+export interface ProductProps {
+  id: number;
+  name: string;
+  description: string;
+  color: string;
+  sizes: string[];
+  price: number;
+  images: string[];
+}
 
 export function ProductPage() {
+  const sizes = ["P", "M", "G", "GG"];
+  const products: ProductProps[] = shirts;
+  const [currentProduct, setCurrentProduct] = useState<ProductProps>(shirts[0]);
+
+  const [currentImage, setCurrentImage] = useState<string>(
+    currentProduct.images[0]
+  );
+  const [currentColor, setCurrentColor] = useState<string>("");
+  const [currentSize, setCurrentSize] = useState<string>("");
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex flex-col gap-4">
           <div className="relative w-full aspect-square rounded-2xl overflow-hidden border border-gray-200">
-            <img src={productImg} alt="Produto" className="object-cover" />
+            <img src={currentImage} alt="Produto" className="object-cover" />
           </div>
           <div className="flex gap-2 overflow-x-auto pb-2">
-            <button className="relative w-20 h-20 rounded-md overflow-hidden border-2 flex-shrink-0 border-orange-600">
-              <img src={productImg} className="object-cover" />
-            </button>
-            <button className="relative w-20 h-20 rounded-md overflow-hidden border-2 flex-shrink-0 border-gray-100">
-              <img src={productImg2} className="object-cover" />
-            </button>
-            <button className="relative w-20 h-20 rounded-md overflow-hidden border-2 flex-shrink-0 border-gray-100">
-              <img src={productImg3} className="object-cover" />
-            </button>
-            <button className="relative w-20 h-20 rounded-md overflow-hidden border-2 flex-shrink-0 border-gray-100">
-              <img src={productImg4} className="object-cover" />
-            </button>
+            {currentProduct.images.map((image, index) => (
+              <button
+                key={index}
+                className={`relative w-20 h-20 rounded-md overflow-hidden flex-shrink-0 border-2 ${
+                  currentImage === image
+                    ? "border-orange-600"
+                    : "border-gray-100"
+                }`}
+                onClick={() => setCurrentImage(currentProduct.images[index])}
+              >
+                <img src={image} className="object-cover" />
+              </button>
+            ))}
           </div>
         </div>
         <div className="flex flex-col gap-6">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-              Camisa Puma No. 1 - Branca
+              {currentProduct.name} - {currentProduct.color}
             </h1>
             <span className="text-xl md:text-2xl font-semibold mt-2 text-orange-600">
               {new Intl.NumberFormat("pt-BR", {
                 style: "currency",
                 currency: "BRL",
-              }).format(67.99)}
+              }).format(Number(currentProduct.price))}
             </span>
           </div>
-          <span className="text-gray-500">
-            Vista o conforto e estilo da Camiseta Puma! Confeccionada em tecido
-            macio, oferece alta respirabilidade e toque agradável à pele,
-            garantindo bem-estar em qualquer ocasião. Com modelagem regular,
-            proporciona caimento leve e versátil, combina facilmente com jeans e
-            tênis para looks casuais. Prática e moderna, é daquelas peças
-            indispensáveis no guarda-roupa de quem busca simplicidade com
-            estilo. Não perca tempo - peça sua camiseta Puma e aproveite!
-          </span>
+          <span className="text-gray-500">{currentProduct.description}</span>
           <div className="space-y-3">
-            <h3 className="font-medium text-gray-900">Cor: Branco</h3>
+            <h3 className="font-medium text-gray-900">
+              Cor: {currentProduct.color}
+            </h3>
             <div className="flex flex-wrap gap-3">
-              <button className="px-4 py-2 rounded-md border-2 border-orange-600 bg-orange-600/10 text-orange-600 font-bold">
-                Branco
-              </button>
-              <button className="px-4 py-2 rounded-md border border-gray-300 hover:border-gray-400">
-                Cinza
-              </button>
-              <button className="px-4 py-2 rounded-md border border-gray-300 hover:border-gray-400">
-                Preto
-              </button>
+              {products.map((product) => (
+                <button
+                  key={product.id}
+                  className={`relative w-10 h-10 rounded-md overflow-hidden flex-shrink-0 border-2 ${
+                    currentProduct.color === product.color
+                      ? "border-orange-600"
+                      : "border-gray-100"
+                  }`}
+                  onClick={() => {
+                    setCurrentSize("");
+                    setCurrentProduct(product);
+                    setCurrentImage(product.images[0]);
+                  }}
+                >
+                  <img src={product.images[0]} className="object-cover" />
+                </button>
+              ))}
             </div>
           </div>
 
           <div className="space-y-3">
             <h3 className="font-medium text-gray-900">Tamanho: P</h3>
             <div className="flex flex-wrap gap-3">
-              <button className="px-4 py-2 rounded-md border-2 border-orange-600 text-orange-600 bg-orange-600/10 font-bold">
-                P
-              </button>
-              <button className="px-4 py-2 rounded-md border border-gray-300 hover:border-gray-400">
-                M
-              </button>
-              <button className="px-4 py-2 rounded-md border border-gray-300 hover:border-gray-400">
-                G
-              </button>
+              {sizes.map((size) => (
+                <button
+                  key={size}
+                  className={`px-4 py-2 rounded-md border-2 ${
+                    currentSize === size
+                      ? "border-orange-600 text-orange-600"
+                      : "border-gray-300 text-gray-500"
+                  } ${!currentProduct.sizes.includes(size) && "opacity-50"}
+                  }`}
+                  onClick={() => {
+                    setCurrentSize(size);
+                  }}
+                  disabled={!currentProduct.sizes.includes(size)}
+                >
+                  {size}
+                </button>
+              ))}
             </div>
           </div>
           <div className="space-y-3 mt-4">
