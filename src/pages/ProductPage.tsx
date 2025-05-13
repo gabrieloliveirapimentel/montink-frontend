@@ -109,18 +109,18 @@ export function ProductPage() {
               </span>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex flex-row max-md:flex-col gap-2">
               <input
                 type="text"
                 placeholder="CEP"
                 value={currentCep}
                 onChange={handleCepChange}
                 maxLength={9}
-                className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600"
+                className="px-4 py-4 border-2 border-gray-300 rounded-md focus-within:border-2 focus-within:border-orange-600 w-[70%] max-md:w-full"
               />
 
               <button
-                className="px-4 py-4 rounded-md border-2 border-orange-600 text-orange-600 font-semibold hover:bg-orange-600/10"
+                className="px-4 py-4 rounded-md border-2 border-orange-600 text-orange-600 font-semibold hover:bg-orange-600/10 w-[30%] max-md:w-full"
                 onClick={() =>
                   window.open(
                     "https://buscacepinter.correios.com.br/app/endereco/index.php",
