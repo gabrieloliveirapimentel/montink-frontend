@@ -42,3 +42,7 @@ export interface SizeOptionsProps {
   setCurrentSize: (size: string) => void;
   currentProduct: ProductProps;
 }
+
+export interface ProductDetailsProps {
+  currentProduct: ProductProps;
+}
