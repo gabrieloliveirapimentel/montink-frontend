@@ -1,0 +1,46 @@
+{
+    "shirts": [
+        {
+            "id": 1,
+            "name": "Camisa Puma No.1",
+            "description": "Vista o conforto e estilo da Camiseta Puma! Confeccionada em tecido macio, oferece alta respirabilidade e toque agradável à pele, garantindo bem-estar em qualquer ocasião. Com modelagem regular, proporciona caimento leve e versátil, combina facilmente com jeans e tênis para looks casuais. Prática e moderna, é daquelas peças indispensáveis no guarda-roupa de quem busca simplicidade com estilo. Não perca tempo - peça sua camiseta Puma e aproveite!",
+            "color": "Branca",
+            "sizes": ["P", "M", "G", "GG"],
+            "price": 69.90,
+            "images": [
+                "/shirts/PI3-5765-014_zoom1.webp",
+                "/shirts/PI3-5765-014_zoom2.webp",
+                "/shirts/PI3-5765-014_zoom3.webp",
+                "/shirts/PI3-5765-014_zoom4.webp"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Camisa Puma No.1",
+            "description": "Vista o conforto e estilo da Camiseta Puma! Confeccionada em tecido macio, oferece alta respirabilidade e toque agradável à pele, garantindo bem-estar em qualquer ocasião. Com modelagem regular, proporciona caimento leve e versátil, combina facilmente com jeans e tênis para looks casuais. Prática e moderna, é daquelas peças indispensáveis no guarda-roupa de quem busca simplicidade com estilo. Não perca tempo - peça sua camiseta Puma e aproveite!",
+            "color": "Cinza",
+            "sizes": ["P", "G"],
+            "price": 79.90,
+            "images": [
+                "/shirts/PI3-5765-010_zoom1.webp",
+                "/shirts/PI3-5765-010_zoom2.webp",
+                "/shirts/PI3-5765-010_zoom3.webp",
+                "/shirts/PI3-5765-010_zoom4.webp"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Camisa Puma No.1",
+            "description": "Vista o conforto e estilo da Camiseta Puma! Confeccionada em tecido macio, oferece alta respirabilidade e toque agradável à pele, garantindo bem-estar em qualquer ocasião. Com modelagem regular, proporciona caimento leve e versátil, combina facilmente com jeans e tênis para looks casuais. Prática e moderna, é daquelas peças indispensáveis no guarda-roupa de quem busca simplicidade com estilo. Não perca tempo - peça sua camiseta Puma e aproveite!",
+            "color": "Preta",
+            "sizes": ["P", "M", "G"],
+            "price": 69.90,
+            "images": [
+                "/shirts/PI3-5765-006_zoom1.webp",
+                "/shirts/PI3-5765-006_zoom2.webp",
+                "/shirts/PI3-5765-006_zoom3.webp",
+                "/shirts/PI3-5765-006_zoom4.webp"
+            ]
+        }
+    ]
+}
