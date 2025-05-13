@@ -12,3 +12,10 @@ span {
   font-family: 'Poppins', sans-serif;  
   line-height: 120%;
 }
+
+input {
+  &:focus {
+    outline: none;
+    box-shadow: 0;
+  }
+}
