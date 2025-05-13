@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.6rem;
+  
+  font-weight: bold;
+  line-height: 120%;
+}
+
+span {
+  font-family: 'Poppins', sans-serif;  
+  line-height: 120%;
+}
