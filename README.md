@@ -20,10 +20,12 @@ As seguintes ferramentas e bibliotecas foram utilizadas neste projeto
 ---
 
 ### Deploy
+
 Você pode visualizar esse projeto com deploy clicando no [link](https://montink-frontend.vercel.app/).
+
 ---
 
-### Getting started
+### Rodando o projeto
 Para rodar essa aplicação local, siga os passos abaixo:
 
 **Clone o repositório:**
