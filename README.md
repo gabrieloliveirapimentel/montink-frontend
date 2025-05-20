@@ -1,8 +1,8 @@
 <h3 align="center">
-  Montink Frontend
+  Montink Shop
 </h3>
 
-Esse projeto foi desenvolvido para o teste rápido como parte do processo seletivo do Montink para Desenvolvedor Front-end. O desafio consiste em criar um front-end utilizando <b>React</b> e <b>Tailwind CSS</b>, de uma página de produto de E-commerce, contendo:
+Esse projeto consistiu-se em criar um front-end utilizando <b>React</b> e <b>Tailwind CSS</b>, de uma página de produto de E-commerce, contendo:
 - **Imagens do produto:** Uma imagem principal que ocupe cerca de 35% da tela, e abaixo dela, miniaturas de outras imagens do mesmo produto.
 - Título e preço do produto.
 - **Seletores de variantes de produto:** Tamanho e Cor. Esses campos precisam ser gerados de maneira dinâmica.
