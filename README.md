@@ -19,24 +19,18 @@ As seguintes ferramentas e bibliotecas foram utilizadas neste projeto
 
 ---
 
-### Deploy
-
-Você pode visualizar esse projeto com deploy clicando no [link](https://montink-frontend.vercel.app/).
-
----
-
 ### Rodando o projeto
 Para rodar essa aplicação local, siga os passos abaixo:
 
 **Clone o repositório:**
 
 ```bash
-git clone https://github.com/gabrieloliveirapimentel/montink-frontend.git
+git clone https://github.com/gabrieloliveirapimentel/montink-shop.git
 ```
 
 **Navege até o diretório do projeto e instale as dependências:**
 ```bash
-cd montink-frontend
+cd montink-shop
 npm install
 ```
 
